@@ -1,9 +1,8 @@
 package com.carpiness.job.service;
 
-import com.carpiness.job.App;
 import com.carpiness.job.config.ApplicationContext;
-import com.carpiness.job.domain.PrintItem;
 import com.carpiness.job.domain.Job;
+import com.carpiness.job.domain.PrintItem;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

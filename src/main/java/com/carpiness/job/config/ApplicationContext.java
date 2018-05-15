@@ -17,9 +17,9 @@ public enum ApplicationContext {
     private boolean ignoreCase = false;
     private boolean failFast   = true;
 
-    private BigDecimal taxRate     = new BigDecimal(0.07);
-    private BigDecimal margin      = new BigDecimal(0.11);
-    private BigDecimal extraMargin = new BigDecimal(0.05);
+    private BigDecimal taxRate     = new BigDecimal("0.07");
+    private BigDecimal margin      = new BigDecimal("0.11");
+    private BigDecimal extraMargin = new BigDecimal("0.05");
 
     public void switchOffFailFast() {
         failFast = false;

@@ -4,13 +4,12 @@ import com.carpiness.job.config.ApplicationContext;
 import com.carpiness.job.config.BeanConfig;
 import com.carpiness.job.domain.Job;
 import com.carpiness.job.input.FileProcessor;
-import com.carpiness.job.service.StringParser;
 import com.carpiness.job.input.console.ConsoleDriver;
 import com.carpiness.job.service.ChargeCalculator;
+import com.carpiness.job.service.StringParser;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -28,7 +27,7 @@ public class App {
     public static void main(String... args) {
         LOG.info("Start");
 
-        Set<String> params = new HashSet<>(Arrays.asList(args)); // To prevent duplicate file names
+        Set<String> params = new HashSet<>(asList(args)); // To prevent duplicate file names
 
         if (params.contains(PARAM_HELP)) {
             params.remove(PARAM_HELP);
@@ -81,10 +80,11 @@ public class App {
     }
 
     private static void consoleWork() {
+        BeanConfig config = BeanConfig.INSTANCE;
         System.out.println("Please input data. To finish input empty line.\n");
-        ConsoleDriver consoleDriver = BeanConfig.INSTANCE.getConsoleDriver();
-        StringParser jobLoader = BeanConfig.INSTANCE.getJobLoader();
-        ChargeCalculator calculator = BeanConfig.INSTANCE.getCalculator();
+        ConsoleDriver consoleDriver = config.getConsoleDriver();
+        StringParser jobLoader = config.getJobLoader();
+        ChargeCalculator calculator = config.getCalculator();
         Iterable<String> lines = consoleDriver.load();
         Job job = jobLoader.load(lines);
         List<String> result = calculator.calc(job);

@@ -1,16 +1,13 @@
 package com.carpiness.job.service;
 
-import com.carpiness.job.domain.PrintItem;
 import com.carpiness.job.domain.Job;
+import com.carpiness.job.domain.PrintItem;
 
 import java.math.BigDecimal;
-import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
 import static java.math.BigDecimal.ROUND_DOWN;
-import static java.math.BigDecimal.ROUND_HALF_DOWN;
 import static java.math.BigDecimal.ZERO;
 
 public class ChargeCalculatorImpl implements ChargeCalculator {
