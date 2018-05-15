@@ -11,4 +11,5 @@ public interface FileProcessor {
      * @param fileName the file name without extension. The full file name will be {@code <fileName>.in}
      */
     void process(String fileName);
+
 }
