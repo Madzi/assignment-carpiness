@@ -1,21 +1,14 @@
 package com.carpiness.job.input;
 
 import com.carpiness.job.config.AppState;
+import com.carpiness.job.domain.Item;
 import com.carpiness.job.domain.Job;
-import com.carpiness.job.input.token.ExemptToken;
-import com.carpiness.job.input.token.ExtraMarginToken;
-import com.carpiness.job.input.token.IdentifierToken;
-import com.carpiness.job.input.token.NumberToken;
-import com.carpiness.job.input.token.Token;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Optional;
 import java.util.StringTokenizer;
-
-import static java.lang.Character.isDigit;
-import static java.util.Arrays.asList;
 
 public class JobLoaderImpl implements JobLoader {
 
@@ -24,35 +17,45 @@ public class JobLoaderImpl implements JobLoader {
 
     @Override
     public Job load(Iterable<String> strings) {
+        Iterator<String> stringIterator = strings.iterator();
+        Optional<String> preview = stringIterator.hasNext() ? Optional.of(stringIterator.next()) : Optional.empty();
+        List<Item> items = new ArrayList<>();
         boolean extra = false;
-        List<Token> tokens = new ArrayList<>();
-        strings.forEach(line -> tokens.addAll(parseLine(line)));
-        Iterator<Token> iterator = tokens.iterator();
-        Token token = iterator.hasNext() ? iterator.next() : null;
-        if (token == null) {
-            return new Job();
+        if (preview.isPresent() && AppState.INSTANCE.compare(KEYWORD_EXTRA_MARGIN, preview.get()) ) {
+            extra = true;
+            preview = stringIterator.hasNext() ? Optional.of(stringIterator.next()) : Optional.empty();
         }
-        return null;
+        Job job = new Job(extra, items);
+        while (preview.isPresent()) {
+            Optional<Item> oItem = parseItemLine(preview.get());
+            oItem.ifPresent(items::add);
+            preview = stringIterator.hasNext() ? Optional.of(stringIterator.next()) : Optional.empty();
+        }
+        return job;
     }
 
-    private List<Token> parseLine(String line) {
-        List<Token> tokens = new ArrayList<>();
-        if (AppState.INSTANCE.compare(KEYWORD_EXTRA_MARGIN, line)) {
-            tokens.add(new ExtraMarginToken());
-        } else {
-            StringTokenizer tokenizer = new StringTokenizer(line);
-            while (tokenizer.hasMoreTokens()) {
-                String element = tokenizer.nextToken();
-                if (AppState.INSTANCE.compare(KEYWORD_EXEMPT, element)) {
-                    tokens.add(new ExemptToken());
-                } else if (isDigit(element.charAt(0))) {
-                    tokens.add(new NumberToken(Double.parseDouble(element)));
-                } else {
-                    tokens.add(new IdentifierToken(element));
-                }
+    private Optional<Item> parseItemLine(String line) {
+        StringTokenizer tokenizer = new StringTokenizer(line);
+        Optional<String> name = tokenizer.hasMoreTokens() ? Optional.of(tokenizer.nextToken()) : Optional.empty();
+        Optional<String> value = tokenizer.hasMoreTokens() ? Optional.of(tokenizer.nextToken()) : Optional.empty();
+        Optional<String> exempt = tokenizer.hasMoreTokens() ? Optional.of(tokenizer.nextToken()) : Optional.empty();
+        if (name.isPresent() && value.isPresent()) {
+            try {
+                Double dblValue = Double.valueOf(value.get());
+                return Optional.of(new Item(name.get(), dblValue, exempt.isPresent() && AppState.INSTANCE.compare(KEYWORD_EXEMPT, exempt.get())));
+            } catch (NumberFormatException ex) {
+                checkFailFast(line);
             }
+        } else {
+            checkFailFast(line);
         }
-        return tokens;
+        return Optional.empty();
+    }
+
+    private void checkFailFast(String line) {
+        if (AppState.INSTANCE.isFailFast()) {
+            throw new IllegalStateException("Unable parse Item string: " + line);
+        }
     }
 
 }

@@ -20,6 +20,10 @@ public enum AppState {
         failFast = false;
     }
 
+    public void switchOffCaseSensitivity() {
+        ignoreCase = true;
+    }
+
     public boolean isIgnoreCase() {
         return ignoreCase;
     }

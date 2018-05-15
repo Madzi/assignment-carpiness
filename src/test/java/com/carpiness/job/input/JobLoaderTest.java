@@ -2,6 +2,7 @@ package com.carpiness.job.input;
 
 import com.carpiness.job.BeanRepo;
 import com.carpiness.job.config.AppState;
+import com.carpiness.job.domain.Item;
 import com.carpiness.job.domain.Job;
 import jdk.nashorn.internal.runtime.regexp.RegExp;
 import org.junit.jupiter.api.Assertions;
@@ -25,24 +26,47 @@ public class JobLoaderTest {
 
         // When
         Job job = loader.load(lines);
-        int actualSize = job.getItems().size();
 
         // Then
+        int actualSize = job.getItems().size();
         Assertions.assertEquals(expectedSize, actualSize);
     }
 
     @Test
     public void testParsing() {
+        // Given
+        int expectedSize = 2;
         List<String> inputs = asList(
                 "extra-margin",
                 "envelopes 520.00",
                 "letterhead 1983.37 exempt"
         );
-        StringTokenizer tokenizer = new StringTokenizer("The long  long   long string");
-        while (tokenizer.hasMoreTokens()) {
-            System.out.println(tokenizer.nextToken());
-        }
-//        asList("The long  long   long string".split(" ")).forEach(System.out::println);
+
+        // When
+        Job job = loader.load(inputs);
+
+        // Then
+        List<Item> items = job.getItems();
+        int actualSize = items.size();
+        Assertions.assertEquals(expectedSize, actualSize);
+        Assertions.assertEquals("envelopes", items.get(0).getName());
+        Assertions.assertEquals("letterhead", items.get(1).getName());
+    }
+
+    @Test
+    public void testException() {
+        // Given
+        List<String> inputs = asList(
+                "envelopes",
+                "extra-margin",
+                "letterhead 1983.37 exempt"
+        );
+
+        // When
+        // Then
+        Assertions.assertThrows(IllegalStateException.class, () -> {
+            Job job = loader.load(inputs);
+        });
     }
 
 }

@@ -16,6 +16,7 @@ public class App {
 
     private static final String PARAM_HELP         = "--help";
     private static final String PARAM_IGNORE_ERROR = "--ignore-error";
+    private static final String PARAM_IGNORE_CASE  = "--ignore-case";
 
     public static void main(String... args) {
         LOG.info("Start");
@@ -30,6 +31,11 @@ public class App {
         if (params.contains(PARAM_IGNORE_ERROR)) {
             params.remove(PARAM_IGNORE_ERROR);
             ignoreFailFast();
+        }
+
+        if (params.contains(PARAM_IGNORE_CASE)) {
+            params.remove(PARAM_IGNORE_CASE);
+            ignoreCase();
         }
 
         if (params.isEmpty()) {
@@ -47,8 +53,9 @@ public class App {
                 "",
                 "    option",
                 "        Only two option supported:",
-                "            --help             : This screen will be displayed.",
-                "            --ignore-fail-fast : All exceptions will be skipped. It's may be useful for batch processing.",
+                "            --help         : This screen will be displayed.",
+                "            --ignore-error : All exceptions will be skipped. It's may be useful for batch processing.",
+                "            --ignore-case  : The 'extra-margin' and 'exempt' keywords will be accepted in any case.",
                 "",
                 "    file-name-list",
                 "        This is a list of file names without extensions.",
@@ -60,6 +67,10 @@ public class App {
 
     private static void ignoreFailFast() {
         AppState.INSTANCE.switchOffFailFast();
+    }
+
+    private static void ignoreCase() {
+        AppState.INSTANCE.switchOffCaseSensitivity();
     }
 
     private static void consoleWork() {}
