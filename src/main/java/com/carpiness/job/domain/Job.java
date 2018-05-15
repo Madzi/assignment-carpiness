@@ -6,28 +6,28 @@ import static java.util.Arrays.asList;
 
 public class Job {
 
-    private List<Item> items;
+    private List<PrintItem> printItems;
     private boolean extra;
 
-    public Job(boolean extra, List<Item> items) {
+    public Job(boolean extra, List<PrintItem> printItems) {
         this.extra = extra;
-        this.items = items;
+        this.printItems = printItems;
     }
 
-    public Job(List<Item> items) {
-        this(false, items);
+    public Job(List<PrintItem> printItems) {
+        this(false, printItems);
     }
 
-    public Job(boolean extra, Item... items) {
-        this(extra, asList(items));
+    public Job(boolean extra, PrintItem... printItems) {
+        this(extra, asList(printItems));
     }
 
-    public Job(Item... items) {
-        this(asList(items));
+    public Job(PrintItem... printItems) {
+        this(asList(printItems));
     }
 
-    public List<Item> getItems() {
-        return items;
+    public List<PrintItem> getPrintItems() {
+        return printItems;
     }
 
     public boolean isExtra() {

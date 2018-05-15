@@ -2,7 +2,8 @@ package com.carpiness.job.input;
 
 import com.carpiness.job.domain.Job;
 import com.carpiness.job.input.file.FileDriver;
-import com.carpiness.job.service.Calculator;
+import com.carpiness.job.service.ChargeCalculator;
+import com.carpiness.job.service.StringParser;
 
 import java.nio.charset.Charset;
 import java.util.List;
@@ -15,10 +16,10 @@ public class FileProcessorImpl implements FileProcessor {
     private static final Charset CHARSET = Charset.forName("UTF-8");
 
     private FileDriver fileDriver;
-    private JobLoader  loader;
-    private Calculator calculator;
+    private StringParser loader;
+    private ChargeCalculator calculator;
 
-    public FileProcessorImpl(FileDriver fileDriver, JobLoader loader, Calculator calculator) {
+    public FileProcessorImpl(FileDriver fileDriver, StringParser loader, ChargeCalculator calculator) {
         this.fileDriver = fileDriver;
         this.calculator = calculator;
         this.loader = loader;

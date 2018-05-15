@@ -2,19 +2,19 @@ package com.carpiness.job.service;
 
 import java.util.List;
 
-import com.carpiness.job.domain.Item;
+import com.carpiness.job.domain.PrintItem;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-import com.carpiness.job.BeanConfig;
+import com.carpiness.job.config.BeanConfig;
 import com.carpiness.job.domain.Job;
 
 import static java.util.Arrays.asList;
 import static java.util.Collections.emptyList;
 
-public class CalculatorTest {
+public class ChargeCalculatorTest {
 
-    private Calculator calculator = BeanConfig.INSTANCE.getCalculator();
+    private ChargeCalculator calculator = BeanConfig.INSTANCE.getCalculator();
 
     @Test
     public void testJobWithoutItems() {
@@ -35,7 +35,7 @@ public class CalculatorTest {
     public void testJobWithOneItem() {
         // Given
         Job oneItemJob = new Job(
-                new Item("t-shirts", 294.04)
+                new PrintItem("t-shirts", 294.04)
         );
         List<String> expected = asList(
                 "t-shirts: $314.62",
@@ -53,8 +53,8 @@ public class CalculatorTest {
     public void testJobWithExtraMargin() {
         // Given
         Job extraMarginJob = new Job(true,
-                new Item("envelopes", 520.00),
-                new Item("letterhead", 1983.37, true)
+                new PrintItem("envelopes", 520.00),
+                new PrintItem("letterhead", 1983.37, true)
         );
         List<String> expected = asList(
                 "envelopes: $556.40",
@@ -73,8 +73,8 @@ public class CalculatorTest {
     public void testJobWithExtraMarginAndAllTaxFree() {
         // Given
         Job extraMarginTaxFreeJob = new Job(true,
-                new Item("frisbees", 19385.38, true),
-                new Item("yo-yos", 1829.00, true)
+                new PrintItem("frisbees", 19385.38, true),
+                new PrintItem("yo-yos", 1829.00, true)
         );
         List<String> expected = asList(
                 "frisbees: $19385.38",

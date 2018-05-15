@@ -1,11 +1,12 @@
 package com.carpiness.job;
 
-import com.carpiness.job.config.AppState;
+import com.carpiness.job.config.ApplicationContext;
+import com.carpiness.job.config.BeanConfig;
 import com.carpiness.job.domain.Job;
 import com.carpiness.job.input.FileProcessor;
-import com.carpiness.job.input.JobLoader;
+import com.carpiness.job.service.StringParser;
 import com.carpiness.job.input.console.ConsoleDriver;
-import com.carpiness.job.service.Calculator;
+import com.carpiness.job.service.ChargeCalculator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -72,18 +73,18 @@ public class App {
     }
 
     private static void ignoreFailFast() {
-        AppState.INSTANCE.switchOffFailFast();
+        ApplicationContext.INSTANCE.switchOffFailFast();
     }
 
     private static void ignoreCase() {
-        AppState.INSTANCE.switchOffCaseSensitivity();
+        ApplicationContext.INSTANCE.switchOffCaseSensitivity();
     }
 
     private static void consoleWork() {
         System.out.println("Please input data. To finish input empty line.\n");
         ConsoleDriver consoleDriver = BeanConfig.INSTANCE.getConsoleDriver();
-        JobLoader jobLoader = BeanConfig.INSTANCE.getJobLoader();
-        Calculator calculator = BeanConfig.INSTANCE.getCalculator();
+        StringParser jobLoader = BeanConfig.INSTANCE.getJobLoader();
+        ChargeCalculator calculator = BeanConfig.INSTANCE.getCalculator();
         Iterable<String> lines = consoleDriver.load();
         Job job = jobLoader.load(lines);
         List<String> result = calculator.calc(job);

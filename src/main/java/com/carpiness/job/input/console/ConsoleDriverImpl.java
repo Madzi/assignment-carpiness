@@ -1,6 +1,6 @@
 package com.carpiness.job.input.console;
 
-import com.carpiness.job.config.AppState;
+import com.carpiness.job.config.ApplicationContext;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -13,7 +13,6 @@ import java.io.Writer;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class ConsoleDriverImpl implements ConsoleDriver {
 
@@ -36,7 +35,7 @@ public class ConsoleDriverImpl implements ConsoleDriver {
             }
             return lines;
         } catch (IOException ex) {
-            AppState.INSTANCE.checkFailFast("Unable read from console");
+            ApplicationContext.INSTANCE.checkFailFast("Unable read from console");
         }
         return Collections.emptyList();
     }
@@ -46,7 +45,7 @@ public class ConsoleDriverImpl implements ConsoleDriver {
         try (BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(outputStream))) {
             lines.forEach(line -> writeLine(writer, line));
         } catch (IOException ex) {
-            AppState.INSTANCE.checkFailFast("Unable write to console");
+            ApplicationContext.INSTANCE.checkFailFast("Unable write to console");
         }
     }
 
@@ -54,7 +53,7 @@ public class ConsoleDriverImpl implements ConsoleDriver {
         try {
             writer.write(line + "\n");
         } catch (IOException ex) {
-            AppState.INSTANCE.checkFailFast("Problem with writing string: " + line);
+            ApplicationContext.INSTANCE.checkFailFast("Problem with writing string: " + line);
         }
     }
 

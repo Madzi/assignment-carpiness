@@ -1,6 +1,6 @@
 package com.carpiness.job.input.file;
 
-import com.carpiness.job.config.AppState;
+import com.carpiness.job.config.ApplicationContext;
 
 import java.io.IOException;
 import java.nio.charset.Charset;
@@ -20,7 +20,7 @@ public class TxtFileDriver  implements FileDriver {
         try (Stream<String> stream = Files.lines(Paths.get(fileName))) {
             return stream.collect(Collectors.toList());
         } catch (IOException ex) {
-            AppState.INSTANCE.checkFailFast("Unable load file: " + fileName);
+            ApplicationContext.INSTANCE.checkFailFast("Unable load file: " + fileName);
         }
         return Collections.emptyList();
     }
@@ -31,7 +31,7 @@ public class TxtFileDriver  implements FileDriver {
         try {
             Files.write(out, lines, CHARSET);
         } catch (IOException ex) {
-            AppState.INSTANCE.checkFailFast("Unable write result to file: " + fileName);
+            ApplicationContext.INSTANCE.checkFailFast("Unable write result to file: " + fileName);
         }
     }
 

@@ -6,13 +6,13 @@ import org.slf4j.LoggerFactory;
 import java.math.BigDecimal;
 
 /**
- * Singleton for keeping application state.
+ * Singleton for keeping application context with configuration.
  */
-public enum AppState {
+public enum ApplicationContext {
 
     INSTANCE;
 
-    private static final Logger LOG = LoggerFactory.getLogger(AppState.class);
+    private static final Logger LOG = LoggerFactory.getLogger(ApplicationContext.class);
 
     private boolean ignoreCase = false;
     private boolean failFast   = true;

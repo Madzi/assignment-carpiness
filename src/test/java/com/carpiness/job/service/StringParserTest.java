@@ -1,7 +1,7 @@
-package com.carpiness.job.input;
+package com.carpiness.job.service;
 
-import com.carpiness.job.BeanConfig;
-import com.carpiness.job.domain.Item;
+import com.carpiness.job.config.BeanConfig;
+import com.carpiness.job.domain.PrintItem;
 import com.carpiness.job.domain.Job;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -11,9 +11,9 @@ import java.util.List;
 
 import static java.util.Arrays.asList;
 
-public class JobLoaderTest {
+public class StringParserTest {
 
-    private JobLoader loader = BeanConfig.INSTANCE.getJobLoader();
+    private StringParser loader = BeanConfig.INSTANCE.getJobLoader();
 
     @Test
     public void testEmptyInput() {
@@ -25,7 +25,7 @@ public class JobLoaderTest {
         Job job = loader.load(lines);
 
         // Then
-        int actualSize = job.getItems().size();
+        int actualSize = job.getPrintItems().size();
         Assertions.assertEquals(expectedSize, actualSize);
     }
 
@@ -43,7 +43,7 @@ public class JobLoaderTest {
         Job job = loader.load(inputs);
 
         // Then
-        List<Item> items = job.getItems();
+        List<PrintItem> items = job.getPrintItems();
         int actualSize = items.size();
         Assertions.assertEquals(expectedSize, actualSize);
         Assertions.assertEquals("envelopes", items.get(0).getName());
