@@ -1,22 +1,19 @@
 package com.carpiness.job.input;
 
-import com.carpiness.job.BeanRepo;
-import com.carpiness.job.config.AppState;
+import com.carpiness.job.BeanConfig;
 import com.carpiness.job.domain.Item;
 import com.carpiness.job.domain.Job;
-import jdk.nashorn.internal.runtime.regexp.RegExp;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import java.util.Collections;
 import java.util.List;
-import java.util.StringTokenizer;
 
 import static java.util.Arrays.asList;
 
 public class JobLoaderTest {
 
-    private JobLoader loader = BeanRepo.INSTANCE.getJobLoader();
+    private JobLoader loader = BeanConfig.INSTANCE.getJobLoader();
 
     @Test
     public void testEmptyInput() {

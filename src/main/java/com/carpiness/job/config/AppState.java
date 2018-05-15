@@ -1,5 +1,8 @@
 package com.carpiness.job.config;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import java.math.BigDecimal;
 
 /**
@@ -8,6 +11,8 @@ import java.math.BigDecimal;
 public enum AppState {
 
     INSTANCE;
+
+    private static final Logger LOG = LoggerFactory.getLogger(AppState.class);
 
     private boolean ignoreCase = false;
     private boolean failFast   = true;
@@ -50,6 +55,14 @@ public enum AppState {
         } else {
             return ignoreCase ? str1.equalsIgnoreCase(str2) : str1.equals(str2);
         }
+    }
+
+    public void checkFailFast(String message) {
+        if (failFast) {
+            LOG.error("Illegal state: {} - Fail Fast", message);
+            throw new IllegalStateException(message);
+        }
+        LOG.warn("Illegal state: {} - Skip");
     }
 
 }

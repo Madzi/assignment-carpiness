@@ -6,16 +6,15 @@ import com.carpiness.job.domain.Item;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-import com.carpiness.job.BeanRepo;
+import com.carpiness.job.BeanConfig;
 import com.carpiness.job.domain.Job;
-import com.carpiness.job.service.Calculator;
 
 import static java.util.Arrays.asList;
 import static java.util.Collections.emptyList;
 
 public class CalculatorTest {
 
-    private Calculator calculator = BeanRepo.INSTANCE.getCalculator();
+    private Calculator calculator = BeanConfig.INSTANCE.getCalculator();
 
     @Test
     public void testJobWithoutItems() {
