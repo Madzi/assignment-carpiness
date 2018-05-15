@@ -1,4 +1,4 @@
-package service;
+package com.carpiness.job.service;
 
 import java.util.List;
 

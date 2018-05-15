@@ -1,7 +1,8 @@
 package com.carpiness.job;
 
-import java.math.BigDecimal;
-
+import com.carpiness.job.config.AppState;
+import com.carpiness.job.input.JobLoader;
+import com.carpiness.job.input.JobLoaderImpl;
 import com.carpiness.job.service.Calculator;
 import com.carpiness.job.service.CalculatorImpl;
 
@@ -9,13 +10,23 @@ public enum BeanRepo {
     INSTANCE;
 
     private Calculator calculator;
+    private JobLoader jobLoader;
 
     BeanRepo() {
-        calculator = new CalculatorImpl(new BigDecimal("0.07"), new BigDecimal("0.11"), new BigDecimal("0.05"));
+        jobLoader = new JobLoaderImpl();
+        calculator = new CalculatorImpl(
+                AppState.INSTANCE.getTaxRate(),
+                AppState.INSTANCE.getMargin(),
+                AppState.INSTANCE.getExtraMargin()
+        );
     }
 
     public Calculator getCalculator() {
         return calculator;
+    }
+
+    public JobLoader getJobLoader() {
+        return jobLoader;
     }
 
 }
