@@ -2,7 +2,6 @@ package com.carpiness.job.input;
 
 import com.carpiness.job.config.BeanConfig;
 import com.carpiness.job.input.file.FileDriver;
-import org.apache.logging.log4j.core.util.Assert;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
