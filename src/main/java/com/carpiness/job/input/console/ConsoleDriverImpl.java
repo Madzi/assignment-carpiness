@@ -29,7 +29,7 @@ public class ConsoleDriverImpl implements ConsoleDriver {
         List<String> lines = new ArrayList<>();
         try (BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream))) {
             String line = reader.readLine();
-            while (!line.isEmpty()) {
+            while (line != null && !line.isEmpty()) {
                 lines.add(line);
                 line = reader.readLine();
             }
