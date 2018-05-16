@@ -5,4 +5,4 @@
 [![codebeat badge](https://codebeat.co/badges/d34eb13e-84d4-46bf-b399-eec6980af150)](https://codebeat.co/projects/github-com-madzi-assignment-carpiness-master)
 
 ## Java Assignment
-This is regular (Maven)[Maven](https://maven.apache.org) project.
+This is regular [Maven](https://maven.apache.org) project.
