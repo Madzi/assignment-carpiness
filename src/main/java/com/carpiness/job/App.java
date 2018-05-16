@@ -83,8 +83,8 @@ public class App {
         BeanConfig config = BeanConfig.INSTANCE;
         System.out.println("Please input data. To finish input empty line.\n");
         ConsoleDriver consoleDriver = config.getConsoleDriver();
-        StringParser jobLoader = config.getJobLoader();
-        ChargeCalculator calculator = config.getCalculator();
+        StringParser jobLoader = config.getStringParser();
+        ChargeCalculator calculator = config.getChargeCalculator();
         Iterable<String> lines = consoleDriver.load();
         Job job = jobLoader.load(lines);
         List<String> result = calculator.calc(job);

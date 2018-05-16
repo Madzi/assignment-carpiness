@@ -17,22 +17,22 @@ import com.carpiness.job.service.StringParserImpl;
 public enum BeanConfig {
     INSTANCE;
 
-    private ConsoleDriver consoleDriver;
-    private FileDriver    fileDriver;
-    private ChargeCalculator calculator;
-    private StringParser jobLoader;
-    private FileProcessor fileProcessor;
+    private ConsoleDriver    consoleDriver;
+    private FileDriver       fileDriver;
+    private ChargeCalculator chargeCalculator;
+    private StringParser     stringParser;
+    private FileProcessor    fileProcessor;
 
     BeanConfig() {
         consoleDriver = new ConsoleDriverImpl(System.in, System.out);
         fileDriver    = new TxtFileDriver();
-        jobLoader     = new StringParserImpl();
-        calculator    = new ChargeCalculatorImpl(
+        stringParser = new StringParserImpl();
+        chargeCalculator = new ChargeCalculatorImpl(
                 ApplicationContext.INSTANCE.getTaxRate(),
                 ApplicationContext.INSTANCE.getMargin(),
                 ApplicationContext.INSTANCE.getExtraMargin()
         );
-        fileProcessor = new FileProcessorImpl(fileDriver, jobLoader, calculator);
+        fileProcessor = new FileProcessorImpl(fileDriver, stringParser, chargeCalculator);
     }
 
     public ConsoleDriver getConsoleDriver() {
@@ -43,12 +43,12 @@ public enum BeanConfig {
         return fileDriver;
     }
 
-    public ChargeCalculator getCalculator() {
-        return calculator;
+    public ChargeCalculator getChargeCalculator() {
+        return chargeCalculator;
     }
 
-    public StringParser getJobLoader() {
-        return jobLoader;
+    public StringParser getStringParser() {
+        return stringParser;
     }
 
     public FileProcessor getFileProcessor() {

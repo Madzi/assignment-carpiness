@@ -14,7 +14,7 @@ import static java.util.Collections.emptyList;
 
 public class ChargeCalculatorTest {
 
-    private ChargeCalculator calculator = BeanConfig.INSTANCE.getCalculator();
+    private ChargeCalculator calculator = BeanConfig.INSTANCE.getChargeCalculator();
 
     @Test
     public void testJobWithoutItems() {

@@ -13,7 +13,7 @@ import static java.util.Arrays.asList;
 
 public class StringParserTest {
 
-    private StringParser loader = BeanConfig.INSTANCE.getJobLoader();
+    private StringParser loader = BeanConfig.INSTANCE.getStringParser();
 
     @Test
     public void testEmptyInput() {
