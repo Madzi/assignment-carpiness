@@ -81,7 +81,7 @@ public class App {
 
     private static void consoleWork() {
         BeanConfig config = BeanConfig.INSTANCE;
-        System.out.println("Please input data. To finish input empty line.\n");
+        System.out.println("Please input data. To finish input empty line. (Use '--help' for more options)\n");
         ConsoleDriver consoleDriver = config.getConsoleDriver();
         StringParser jobLoader = config.getStringParser();
         ChargeCalculator calculator = config.getChargeCalculator();
