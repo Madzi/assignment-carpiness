@@ -18,6 +18,12 @@
         </developer>
     </developers>
 
+    <scm>
+        <connection>scm:https://github.com/Madzi/assignment-carpiness.git</connection>
+        <developerConnection>scm:ssh://github.com/Madzi/assignment-carpiness.git</developerConnection>
+        <url>https://github.com/Madzi/assignment-carpiness</url>
+    </scm>
+
     <properties>
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
