@@ -33,8 +33,8 @@ or
 When you run the program, you can use some parameters in the command line:
 
 - *--help* - display short usage description
-- *--ignore-case - allow program get keywords in different cases like _Extra-Margin_ or _EXTRA_MARGIN_
-- *--ignore-error - allow skip unrecognized line in input files, also not fail if one ore more files from batch not found
+- *--ignore-case* - allow program get keywords in different cases like _Extra-Margin_ or _EXTRA_MARGIN_
+- *--ignore-error* - allow skip unrecognized line in input files, also not fail if one ore more files from batch not found
 
 all other parameters recognized as file names (without extensions) for batch processing. Extensions must be '.in' .
 The result of batch processing is stored at files with the same name and extension '.out'
